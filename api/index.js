@@ -2,7 +2,7 @@ export const apiUrl = "http://62.3.41.6";
 
 export const global_header = {
   Accept: "application/json",
-  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwOTI2NDg3LCJpYXQiOjE3MTAzMjE2ODcsImp0aSI6IjEzYmQ2YjYxMGY1YjQ0ZTFiNzVlYWIyODlkNmJlOWZkIiwidXNlcl9pZCI6M30.e54KiZICZ8k-_5pl9LjU_v03-RZWzO-qCpUbOV0RujQ`,
+  // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwOTI2NDg3LCJpYXQiOjE3MTAzMjE2ODcsImp0aSI6IjEzYmQ2YjYxMGY1YjQ0ZTFiNzVlYWIyODlkNmJlOWZkIiwidXNlcl9pZCI6M30.e54KiZICZ8k-_5pl9LjU_v03-RZWzO-qCpUbOV0RujQ`,
 };
 
 
