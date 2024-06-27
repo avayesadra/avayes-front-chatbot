@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: IRANYekanX;
+  font-style: normal;
+  font-weight: bold;
+  src: url("fonts/woff/IRANYekanX-Bold.woff") format("woff"),
+    url("fonts/woff2/IRANYekanX-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: IRANYekanX;
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/woff/IRANYekanX-Regular.woff") format("woff"),
+    url("fonts/woff2/IRANYekanX-Regular.woff2") format("woff2");
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  direction: rtl;
+  font-family: IRANYekanX;
+  color: rgb(var(--foreground-rgb));
+  background: #fff;
+}
+
+.hg-theme-default {
+  font-family: IRANYekanX !important;
+}
+
+header {
+  background: #c6c4c4;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
