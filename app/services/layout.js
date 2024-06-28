@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "خدمات | آوایس",
+};
+
 export default function ServicesLayout({ children }) {
   return (
     <div className="container mx-auto">

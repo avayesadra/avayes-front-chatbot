@@ -2,6 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import avayeSadraLogo from "../public/avaye-sadra-logo.png";
 
 const FooterComponent = () => {
   return (
@@ -19,7 +21,9 @@ const FooterComponent = () => {
           </div>
 
           <div className="flex lg:flex-1 justify-center footer__logo">
-            <Link href={"/"}>لوگو</Link>
+            <Link href={"https://avayesadra.com/"}>
+              <Image src={avayeSadraLogo} height={70} alt="آوای صدرا رسانه" />
+            </Link>
           </div>
 
           <div className="lg:flex lg:flex-1 justify-start">

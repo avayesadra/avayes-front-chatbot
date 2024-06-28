@@ -3,6 +3,8 @@ import Link from "next/link";
 import serviceImage1 from "../public/service-1.png";
 import serviceImage2 from "../public/service-2.png";
 import serviceImage3 from "../public/service-3.png";
+import serviceImage4 from "../public/service-4.png";
+import serviceImage5 from "../public/service-5.png";
 
 export default function Home() {
   return (
@@ -45,16 +47,16 @@ export default function Home() {
             <div className="services__item h-3/6">
               <span className="services__heading">سوالات متداول</span>
 
-              <Image src={serviceImage2} width={100} alt="سوالات متداول" />
+              <Image src={serviceImage4} width={100} alt="سوالات متداول" />
             </div>
           </div>
 
           <div className="services gap-4">
-            <div className="services__item h-full">
+            <Link href={"/chatbot"} className="services__item h-full">
               <span className="services__heading">قوانین</span>
 
-              <Image src={serviceImage2} height={200} alt="قوانین" />
-            </div>
+              <Image src={serviceImage5} height={200} alt="قوانین" />
+            </Link>
           </div>
         </div>
       </div>
