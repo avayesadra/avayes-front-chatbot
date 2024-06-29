@@ -3,8 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { global_header } from "../../api";
 import axios from "axios";
-import Keyboard from "react-simple-keyboard";
-import "react-simple-keyboard/build/css/index.css";
 import ChatInput from "../../components/ChatInputComponent";
 import LoadingBubbleComponent from "./_component/LoadingBubbleComponent";
 
@@ -33,7 +31,7 @@ export default function chatBotPage() {
         }`,
         {
           api_key: "sec_YD0yAFYR15C6MALgumWmtEG48g6BKuRw",
-          sourceId: "cha_2VBM1BFWdy3MY2BkGNRdl",
+          sourceId: "cha_qpyXO7SygYm9t9nsk4Icu",
         },
         {
           headers: global_header,
@@ -59,7 +57,7 @@ export default function chatBotPage() {
   return (
     <div
       className="flex flex-col h-screen bg-gray-100 mt-2 mb-5"
-      style={{ height: "500px", width: "80%" }}
+      style={{ height: "70vh", width: "80%" }}
     >
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message, index) => (
@@ -90,6 +88,8 @@ export default function chatBotPage() {
       </div>
 
       <ChatInput onSendMessage={handleSendMessage} />
+
+      
     </div>
   );
 }
