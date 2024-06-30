@@ -2,6 +2,8 @@ import HeaderComponent from "../components/HeaderComponent";
 import FooterComponent from "../components/FooterComponent";
 import "../styles/globals.css";
 import "../styles/scss/style.scss"; // Import your global SCSS file
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "آوایس",
@@ -15,6 +17,8 @@ export default function RootLayout({ children }) {
           <HeaderComponent />
 
           {children}
+
+          <ToastContainer rtl />
 
           <FooterComponent />
         </main>

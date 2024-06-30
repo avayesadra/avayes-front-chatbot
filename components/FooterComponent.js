@@ -21,7 +21,7 @@ const FooterComponent = () => {
           </div>
 
           <div className="flex lg:flex-1 justify-center footer__logo">
-            <Link href={"https://avayesadra.com/"}>
+            <Link href={"/"}>
               <Image src={avayeSadraLogo} height={70} alt="آوای صدرا رسانه" />
             </Link>
           </div>

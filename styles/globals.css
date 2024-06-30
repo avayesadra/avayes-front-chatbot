@@ -39,7 +39,8 @@ body {
   background: #fff;
 }
 
-.hg-theme-default {
+.hg-theme-default,
+.Toastify__toast {
   font-family: IRANYekanX !important;
 }
 

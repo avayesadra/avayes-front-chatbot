@@ -19,7 +19,8 @@
     "react-audio-voice-recorder": "^2.2.0",
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
-    "react-simple-keyboard": "^3.7.129"
+    "react-simple-keyboard": "^3.7.129",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

@@ -122,7 +122,7 @@ select:focus ~ label {
   }
 
   img {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 }
 
@@ -156,4 +156,29 @@ select:focus ~ label {
 
 [dir="rtl"] .hg-theme-default .hg-button {
   height: 35px;
+}
+
+[dir="rtl"] .audio-recorder-timer,
+[dir="rtl"] .audio-recorder-status {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .audio-recorder-status {
+  margin-right: 15px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .audio-recorder-status-dot {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .audio-recorder-options {
+  padding: 12px 12px 12px 6px;
+}
+
+[dir="rtl"] .audio-recorder-options ~ .audio-recorder-options {
+  padding: 12px 6px 12px 12px;
+  border-radius: 5px 0 0 5px;
 }
