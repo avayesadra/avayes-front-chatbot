@@ -4,6 +4,8 @@ import "../styles/globals.css";
 import "../styles/scss/style.scss"; // Import your global SCSS file
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./context/AuthContext";
+import { ModalProvider } from "./context/ModalContext";
 
 export const metadata = {
   title: "آوایس",
@@ -13,15 +15,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
-          <HeaderComponent />
+        <AuthProvider>
+          <ModalProvider>
+            <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
+              <HeaderComponent />
 
-          {children}
+              {children}
 
-          <ToastContainer rtl />
+              <ToastContainer rtl theme={"colored"} />
 
-          <FooterComponent />
-        </main>
+              <FooterComponent />
+            </main>
+          </ModalProvider>
+        </AuthProvider>
       </body>
     </html>
   );
