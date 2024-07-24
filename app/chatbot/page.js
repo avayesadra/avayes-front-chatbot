@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { global_header } from "../../api";
+import { apiUrl, global_header } from "../../api";
 import axios from "axios";
-import ChatInput from "../../components/ChatInputComponent";
+import ChatInput from "./_component/ChatInputComponent";
 import LoadingBubbleComponent from "./_component/LoadingBubbleComponent";
+import { toast } from "react-toastify";
 
 // Sample static message data
 const sampleMessages = [{ text: "چطور می‌تونم کمکتون کنم؟", sender: "bot" }];
@@ -26,12 +27,10 @@ export default function chatBotPage() {
 
     try {
       const response = await axios.post(
-        `http://62.3.41.6/chat/chat/?${
-          messages ? `message=${inputMessage}` : ""
-        }`,
+        `${apiUrl}/chat/chat/?${messages ? `message=${inputMessage}` : ""}`,
         {
-          api_key: "sec_YD0yAFYR15C6MALgumWmtEG48g6BKuRw",
-          sourceId: "cha_qpyXO7SygYm9t9nsk4Icu",
+          api_key: "sec_t2gjpFJW4MJsF70LapknkWDedv1wAffA",
+          sourceId: "cha_OgRCE572OKSVSXqry0AXD",
         },
         {
           headers: global_header,
@@ -42,11 +41,49 @@ export default function chatBotPage() {
         ...updatedMessages,
         { text: response.data.response, sender: "bot" },
       ]);
+
       setIsLoading(false);
+
+      // handleLoadResponse(response.data.response);
     } catch (error) {
-      console.log(error);
+      if (error.response.data.response === 403) {
+        toast.error("مشکلی در ارسال پیش آمده است، لطفا مجدد تلاش نمایید.");
+
+        setIsLoading(false);
+      }
     }
   };
+
+  // const handleLoadResponse = async (message) => {
+  //   const formData = new FormData();
+  //   formData.append("text", message.replace(/[\r\n]+/g, ''));
+  //   formData.append("server", "farsi");
+  //   formData.append("sound", "1");
+
+  //   try {
+  //     const response = await axios.post(
+  //       `https://api.talkbot.ir/v1/media/text-to-speech/REQ`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer sk-ce552951ba713aac6b81d63d8ff5258b`,
+  //         },
+  //       }
+  //     );
+
+  //     console.log(response.data.response.download);
+
+  //     // Create an Audio object and play it
+  //     const audio = new Audio(response.data.response.download);
+  //     audio.play();
+
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.log(error);
+
+  //     setIsLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -56,7 +93,7 @@ export default function chatBotPage() {
 
   return (
     <div
-      className="flex flex-col h-screen bg-gray-100 mt-2 mb-5"
+      className="flex flex-col h-screen bg-gray-100 mt-2 mb-5 rounded"
       style={{ height: "70vh", width: "80%" }}
     >
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -74,6 +111,7 @@ export default function chatBotPage() {
                   ? "bg-blue-500 text-white"
                   : "bg-white text-gray-800"
               }`}
+              style={{ textAlign: "justify" }}
             >
               {message.text}
             </div>
@@ -87,9 +125,7 @@ export default function chatBotPage() {
         )}
       </div>
 
-      <ChatInput onSendMessage={handleSendMessage} />
-
-      
+      <ChatInput onSendMessage={handleSendMessage} loading={isLoading} />
     </div>
   );
 }

@@ -1,24 +1,25 @@
+// ChatInput.js
 import { useState, useRef, useEffect } from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
-import { useAudioRecorder } from "react-audio-voice-recorder";
-import axios from "axios";
-import { toast } from "react-toastify";
+import AudioRecorder from "./AudioRecorder"; // Import the new component
 
-export default function ChatInput({ onSendMessage }) {
+export default function ChatInput({ onSendMessage, loading }) {
   const [inputMessage, setInputMessage] = useState("");
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
 
   const keyboardRef = useRef();
   const inputRef = useRef();
 
-  const recorderControls = useAudioRecorder();
-
   const handleSendMessage = () => {
     if (inputMessage.trim() !== "") {
       onSendMessage(inputMessage);
-      setInputMessage("");
+
+      setInputMessage(""); // Clear the input message
+
+      if (keyboardRef.current) {
+        keyboardRef.current.clearInput(); // Clear the virtual keyboard input
+      }
     }
   };
 
@@ -46,85 +47,31 @@ export default function ChatInput({ onSendMessage }) {
     if (button === "{enter}") handleSendMessage();
   };
 
+  const handleKeyboardToggle = () => {
+    setKeyboardVisible(!keyboardVisible);
+
+    if (keyboardRef.current) {
+      keyboardRef.current.clearInput(); // Clear the virtual keyboard input when toggling
+    }
+  };
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
-  useEffect(() => {
-    recorderControls.recordingBlob &&
-      addAudioElement(recorderControls.recordingBlob);
-  }, [recorderControls.recordingBlob]);
-
-  const handleStartRecording = () => {
-    recorderControls.startRecording();
-    setIsRecording(true);
-  };
-
-  const handleStopRecording = () => {
-    recorderControls.stopRecording();
-    setIsRecording(false);
-  };
-
-  const handleToggleRecording = () => {
-    if (isRecording) {
-      recorderControls.stopRecording();
-      setIsRecording(false);
-    } else {
-      recorderControls.startRecording();
-      setIsRecording(true);
-    }
-  };
-
-  const addAudioElement = async (blob) => {
-    const audioFile = new File([blob], "voice.wav", { type: "audio/wav" });
-    const formData = new FormData();
-    formData.append("audio", audioFile);
-
-    const promise = axios.post(
-      "http://51.68.110.35/speech_to_text/",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    toast.promise(
-      promise,
-      {
-        pending: "در حال پردازش صدا...",
-        success: {
-          render({ data }) {
-            setInputMessage(data.data.transcription_text);
-            return "متن با موفقیت دریافت شد";
-          },
-        },
-        error: {
-          render({ data }) {
-            console.error("Error uploading file:", data);
-            return "پیامی دریافت نشد، لطفا مجدد تلاش نمایید.";
-          },
-        },
-      },
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        progress: undefined,
-      }
-    );
-  };
+  // useEffect(() => {
+  //   if (inputMessage.trim().length >= 2) {
+  //     handleSendMessage();
+  //   }
+  // }, [inputMessage]);
 
   return (
     <div className="border-t border-gray-200" style={{ background: "#f3f4f6" }}>
       <div className="flex items-center flex-row justify-center my-2 gap-4">
         <button
-          onClick={() => setKeyboardVisible(!keyboardVisible)}
+          onClick={handleKeyboardToggle}
           className="py-2 px-4 rounded-full shadow-lg bg-gray-200 hover:bg-gray-300 transition-colors duration-200 flex items-center"
         >
           {keyboardVisible ? (
@@ -155,7 +102,6 @@ export default function ChatInput({ onSendMessage }) {
                 <path
                   fillRule="evenodd"
                   d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z"
-                  clipRule="evenodd"
                 />
               </svg>
 
@@ -164,32 +110,7 @@ export default function ChatInput({ onSendMessage }) {
           )}
         </button>
 
-        <button
-          onClick={handleToggleRecording}
-          className={`py-2 px-4 rounded-full shadow-lg transition-colors duration-200 flex items-center ${
-            isRecording
-              ? "bg-red-500 hover:bg-red-600 text-white"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
-          }`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="size-5 ml-1"
-          >
-            <path d="M7 4a3 3 0 0 1 6 0v6a3 3 0 1 1-6 0V4Z" />
-            <path d="M5.5 9.643a.75.75 0 0 0-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-1.5v-1.546A6.001 6.001 0 0 0 16 10v-.357a.75.75 0 0 0-1.5 0V10a4.5 4.5 0 0 1-9 0v-.357Z" />
-          </svg>
-
-          {isRecording ? "پایان ضبط" : "شروع ضبط"}
-        </button>
-
-        {isRecording && (
-          <div className="text-center text-red-500 font-bold">
-            در حال ضبط...
-          </div>
-        )}
+        <AudioRecorder setInputMessage={setInputMessage} />
       </div>
 
       <div className="flex px-2 pb-2">
@@ -201,13 +122,19 @@ export default function ChatInput({ onSendMessage }) {
           onKeyDown={handleKeyDown}
           placeholder="پیام خود را بنویسید.."
           className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={loading}
         />
 
         <button
           onClick={handleSendMessage}
-          className="bg-blue-500 text-white mr-2 rounded-full px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex items-center justify-center w-20 bg-green-700 text-white mr-2 rounded-full px-4 py-2 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          disabled={loading}
         >
-          ارسال
+          {!loading ? (
+            "ارسال"
+          ) : (
+            <div className="w-4 h-4 border-2 border-solid rounded-full border-gray-100 border-t-gray-400 spin"></div>
+          )}
         </button>
       </div>
 

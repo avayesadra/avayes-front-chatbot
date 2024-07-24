@@ -1,5 +1,5 @@
 :root {
-  --default-border-radius: 15px;
+  --default-border-radius: 0.75rem;
   --sm-border-radius: 12px;
   --primary-color: #00a795;
   --primary-h: 173.53deg;
@@ -10,6 +10,16 @@
     var(--primary-s),
     calc(var(--primary-l) - 10%)
   );
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
 }
 
 .origin-0 {
@@ -92,7 +102,6 @@ select:focus ~ label {
   );
 
   &__item {
-    padding: 30px;
     text-align: center;
     border: 3px solid #cf828f;
     border-radius: 30px;
@@ -121,6 +130,22 @@ select:focus ~ label {
     color: #cf828f;
   }
 
+  &__tip {
+    background: #cf828f;
+    color: #fff;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 30px 0 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+
   img {
     margin-top: 0.5rem;
   }
@@ -131,7 +156,7 @@ select:focus ~ label {
     a {
       display: flex;
       background: #9f0003;
-      height: 68px;
+      height: 76px;
       width: 200px;
       position: absolute;
       top: -20px;
@@ -154,14 +179,14 @@ select:focus ~ label {
   margin-right: 0;
 }
 
-[dir="rtl"] .hg-theme-default .hg-button {
-  height: 35px;
-}
-
 [dir="rtl"] .audio-recorder-timer,
 [dir="rtl"] .audio-recorder-status {
   margin-right: 10px;
   margin-left: 0;
+}
+
+[dir="rtl"] .hg-theme-default .hg-button {
+  height: 45px;
 }
 
 [dir="rtl"] .audio-recorder-status {

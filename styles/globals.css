@@ -37,6 +37,7 @@ body {
   font-family: IRANYekanX;
   color: rgb(var(--foreground-rgb));
   background: #fff;
+  line-height: 2;
 }
 
 .hg-theme-default,
