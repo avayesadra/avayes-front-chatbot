@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import serviceImage1 from "../public/service-1.png";
@@ -12,7 +14,7 @@ export default function Home() {
       <div className="relative flex justify-center">
         <div className="grid grid-cols-4 gap-4">
           <div className="services gap-4">
-            <Link href={"/services"} className="services__item h-full">
+            <Link href={"/services"} className="services__item h-full p-6">
               <span className="services__heading">خدمات</span>
 
               <Image src={serviceImage1} height={200} alt="خدمات" />
@@ -20,7 +22,7 @@ export default function Home() {
           </div>
 
           <div className="services gap-4">
-            <Link href={"/contact"} className="services__item h-full">
+            <Link href={"/contact"} className="services__item h-full p-6">
               <span className="services__heading">
                 نظرات
                 <br />
@@ -38,21 +40,21 @@ export default function Home() {
           </div>
 
           <div className="services gap-4">
-            <div className="services__item h-3/6">
+            <Link href={"/"} className="services__item h-3/6 p-6">
               <span className="services__heading">راهنمای ساختمان</span>
 
               <Image src={serviceImage3} height={100} alt="راهنمای ساختمان" />
-            </div>
+            </Link>
 
-            <div className="services__item h-3/6">
+            <Link href={"/"} className="services__item h-3/6 p-6">
               <span className="services__heading">سوالات متداول</span>
 
               <Image src={serviceImage4} width={100} alt="سوالات متداول" />
-            </div>
+            </Link>
           </div>
 
           <div className="services gap-4">
-            <Link href={"/chatbot"} className="services__item h-full">
+            <Link href={"/chatbot"} className="services__item h-full p-6">
               <span className="services__heading">قوانین</span>
 
               <Image src={serviceImage5} height={200} alt="قوانین" />
