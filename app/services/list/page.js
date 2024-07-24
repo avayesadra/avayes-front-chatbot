@@ -5,6 +5,7 @@ import Link from "next/link";
 import { global_header } from "../../../api";
 import { useEffect, useState } from "react";
 import DataTableComponent from "../../../components/DataTableComponent";
+import ProtectedRoute from "../../../components/HOC/ProtectedRouteComponent";
 
 const data = [
   {
@@ -61,7 +62,7 @@ export default function ServicesListPage() {
   }, []);
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="grid grid-cols-3 gap-4 mb-4 items-center">
         <div className="col-span-2">
           <h4 className="font-bold">درخواست‌ها</h4>
@@ -74,7 +75,7 @@ export default function ServicesListPage() {
         </div>
       </div>
 
-      <DataTableComponent data={complaintData} />
+      <DataTableComponent data={data} />
 
       <div className="mt-4 flex justify-between">
         <div>
@@ -133,6 +134,6 @@ export default function ServicesListPage() {
           </nav>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 }

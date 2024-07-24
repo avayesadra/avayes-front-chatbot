@@ -8,13 +8,13 @@ export default function ServicesPage() {
   return (
     <div className="grid grid-cols-1 gap-4 w-5/12 mx-auto mb-4 items-center">
       <div className="services">
-        <Link href={"/services/create"} className="services__item h-full">
+        <Link href={"/services/items"} className="services__item h-full p-5">
           <span className="services__heading">درخواست خدمت جدید</span>
         </Link>
       </div>
 
       <div className="services">
-        <Link href={"/services/list"} className="services__item h-full">
+        <Link href={"/services/list"} className="services__item h-full p-5">
           <span className="services__heading">پیگیری خدمت گذشته</span>
         </Link>
       </div>
