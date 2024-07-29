@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import DateTime from "./DateTime";
 import tvuLogoImage from "../public/tvu-ac-logo.png";
 import ACECRLogoImage from "../public/ACECR_logo.png";
 import leadersImage from "../public/leaders.png";
@@ -49,7 +48,7 @@ const HeaderComponent = () => {
 
   return (
     <header className="flex w-full flex-row items-center">
-      <div className="basis-1/12 flex justify-end">
+      {/* <div className="basis-1/12 flex justify-end">
         <div
           className="px-4 py-2 text-white text-center"
           style={{
@@ -70,7 +69,7 @@ const HeaderComponent = () => {
             {isLoggedIn ? "خروج" : "ورود/ ثبت نام"}
           </span>
         </div>
-      </div>
+      </div> */}
 
       <div
         className="container mx-auto basis-10/12"
