@@ -1,4 +1,4 @@
-export const apiUrl = "http://62.3.41.6";
+export const apiUrl = "http://62.3.41.6:3000";
 
 export const global_header = {
   Accept: "application/json",
