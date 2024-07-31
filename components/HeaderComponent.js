@@ -116,21 +116,6 @@ const HeaderComponent = () => {
           </div>
         </nav>
       </div>
-
-      <div className="basis-1/12 flex justify-start">
-        {pathname !== "/" && (
-          <div onClick={() => router.back()} style={{ cursor: "pointer" }}>
-            <Image
-              src={chevronLeftImage}
-              width={40}
-              className="mx-auto"
-              alt=""
-            />
-
-            <span className="text-xs mt-2 block">بازگشت</span>
-          </div>
-        )}
-      </div>
     </header>
   );
 };
