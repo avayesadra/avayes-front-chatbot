@@ -27,7 +27,7 @@ export default function chatBotPage() {
 
     try {
       const response = await axios.post(
-        `${apiUrl}/chat/chat/?${messages ? `message=${inputMessage}` : ""}`,
+        `${apiUrl}/account/chat/?${messages ? `message=${inputMessage}` : ""}`,
         {
           api_key: "sec_t2gjpFJW4MJsF70LapknkWDedv1wAffA",
           sourceId: "cha_OgRCE572OKSVSXqry0AXD",

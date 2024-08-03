@@ -1,4 +1,4 @@
-export const apiUrl = "http://backend.avayes.com:3000";
+export const apiUrl = "https://backend.avayes.com";
 
 export const global_header = {
   Accept: "application/json",

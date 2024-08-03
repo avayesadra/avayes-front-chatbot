@@ -43,7 +43,7 @@ const AudioRecorder = ({ setInputMessage }) => {
     const formData = new FormData();
     formData.append("audio", audioFile);
 
-    const promise = axios.post(`${apiUrl}/customer/speech_to_text/`, formData, {
+    const promise = axios.post(`${apiUrl}/account/speech_to_text/`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
