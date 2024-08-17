@@ -92,40 +92,42 @@ export default function chatBotPage() {
   }, [messages]);
 
   return (
-    <div
-      className="flex flex-col h-screen bg-gray-100 mt-2 mb-5 rounded"
-      style={{ height: "70vh", width: "80%" }}
-    >
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            ref={index === messages.length - 1 ? lastMessageRef : null}
-            className={`flex ${
-              message.sender === "user" ? "justify-start" : "justify-end"
-            }`}
-          >
+    <div className="container mx-auto">
+      <div
+        className="flex flex-col h-screen bg-gray-100 mt-2 mb-5 rounded-lg mx-auto"
+        style={{ height: "70vh", width: "95%" }}
+      >
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {messages.map((message, index) => (
             <div
-              className={`max-w-xs md:max-w-md rounded-lg p-3 ${
-                message.sender === "user"
-                  ? "bg-blue-500 text-white"
-                  : "bg-white text-gray-800"
+              key={index}
+              ref={index === messages.length - 1 ? lastMessageRef : null}
+              className={`flex ${
+                message.sender === "user" ? "justify-start" : "justify-end"
               }`}
-              style={{ textAlign: "justify" }}
             >
-              {message.text}
+              <div
+                className={`max-w-xs md:max-w-md rounded-lg p-3 ${
+                  message.sender === "user"
+                    ? "bg-blue-500 text-white"
+                    : "bg-white text-gray-800"
+                }`}
+                style={{ textAlign: "justify" }}
+              >
+                {message.text}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {isLoading && (
-          <div className="flex justify-end">
-            <LoadingBubbleComponent />
-          </div>
-        )}
+          {isLoading && (
+            <div className="flex justify-end">
+              <LoadingBubbleComponent />
+            </div>
+          )}
+        </div>
+
+        <ChatInput onSendMessage={handleSendMessage} loading={isLoading} />
       </div>
-
-      <ChatInput onSendMessage={handleSendMessage} loading={isLoading} />
     </div>
   );
 }

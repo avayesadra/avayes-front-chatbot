@@ -14,19 +14,20 @@ const FooterComponent = () => {
           style={{
             background: "#c6c4c4",
             borderRadius: "100px 100px 0 0",
+            height: "55px",
           }}
         >
-          <div className="flex lg:flex-1 justify-end">
+          <div className="hidden lg:flex lg:flex-1 justify-end">
             موسسه اطلاع رسانی و تبلیغاتی آوای صدرا
           </div>
 
-          <div className="flex lg:flex-1 justify-center footer__logo">
+          <div className="flex lg:flex-1 justify-center footer__logo mx-auto">
             <Link href={"/"}>
               <Image src={avayeSadraLogo} height={70} alt="آوای صدرا رسانه" />
             </Link>
           </div>
 
-          <div className="lg:flex lg:flex-1 justify-start">
+          <div className="hidden lg:flex lg:flex-1 justify-start">
             بزرگترین رسانه تبلیغات محیطی کشور
           </div>
         </nav>

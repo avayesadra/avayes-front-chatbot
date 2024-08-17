@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import tvuLogoImage from "../public/tvu-ac-logo.png";
 import ACECRLogoImage from "../public/ACECR_logo.png";
+import AvayeSadraLogo from "../public/avaye-sadra.png";
 import leadersImage from "../public/leaders.png";
 import defaultAvatarImage from "../public/default-avatar.png";
 import chevronLeftImage from "../public/chevron-left.png";
@@ -79,12 +80,12 @@ const HeaderComponent = () => {
         }}
       >
         <nav className="mx-auto flex w-full items-center justify-between px-3">
-          <div className="flex lg:flex-1 px-2">
-            <Image src={ACECRLogoImage} width={80} alt="جهاد دانشگاهی" />
+          <div className="hidden lg:flex lg:flex-1 lg:justify-start px-2">
+            <Image src={AvayeSadraLogo} width={60} alt="جهاد دانشگاهی" />
           </div>
 
           <div
-            className="lg:flex lg:flex-1 flex-col items-center justify-center p-5"
+            className="lg:flex lg:flex-1 flex-col items-center justify-center p-5 mx-auto"
             style={{
               background: "#9b9797",
               borderRadius: "0 0 100px 100px",
@@ -93,9 +94,9 @@ const HeaderComponent = () => {
           >
             {pathname === "/" ? (
               <>
-                <h5 className="text-sm">جهش تولید با مشارکت مردم</h5>
+                <h5 className="text-sm">موسسه اطلاع رسانی و تبلیغاتی</h5>
 
-                <h3 className="text-2xl font-bold mt-3">جهاد دانشگاهی</h3>
+                <h3 className="text-2xl font-bold mt-3">آوای صدرا رسانه</h3>
               </>
             ) : (
               <Link href={"/"}>
