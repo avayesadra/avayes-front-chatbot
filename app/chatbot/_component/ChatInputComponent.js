@@ -63,7 +63,7 @@ export default function ChatInput({ onSendMessage, loading }) {
 
         <button
           onClick={handleSendMessage}
-          className="flex items-center justify-center w-20 bg-green-900 text-white mr-2 rounded-full px-4 py-2 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+          className="flex items-center justify-center w-20 bg-green-600 text-white mr-2 rounded-full px-4 py-2 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
           disabled={loading}
         >
           {!loading ? (
