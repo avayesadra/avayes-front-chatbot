@@ -8,7 +8,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ModalProvider } from "./context/ModalContext";
 
 export const metadata = {
-  title: "آوایس",
+  title: "چت بات آوایس",
 };
 
 export default function RootLayout({ children }) {

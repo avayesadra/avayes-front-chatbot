@@ -1,4 +1,4 @@
-export const apiUrl = "https://backend.avayes.com";
+export const apiUrl = "https://chatbot.avayes.com/api";
 
 export const global_header = {
   Accept: "application/json",

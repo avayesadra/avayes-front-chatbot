@@ -17,40 +17,45 @@ export default function chatBotPage() {
   const lastMessageRef = useRef(null);
 
   const handleSendMessage = async (inputMessage) => {
-    const updatedMessages = [
-      ...messages,
-      { text: inputMessage, sender: "user" },
-    ];
+    // Update messages to include the new user message
+    const userMessage = { text: inputMessage, sender: "user" };
+    const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
 
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        `${apiUrl}/chat/?${messages ? `message=${inputMessage}` : ""}`,
-        {
-          api_key: "sec_pZ47tF0FLxaUKI43ziFmyIqKxyey9T4y",
-          sourceId: "cha_fqwj6oSyVX1ZbHGkKEbFe",
-        },
-        {
-          headers: global_header,
-        }
-      );
+      // Prepare the request payload
+      const payload = {
+        sourceId: "src_De7h6E6Ie4UXNlIKMLKod",
+        messages: [
+          {
+            role: "user",
+            content: inputMessage,
+          },
+        ],
+      };
 
-      setMessages([
-        ...updatedMessages,
-        { text: response.data.response, sender: "bot" },
-      ]);
+      // Send the POST request
+      const response = await axios.post(`${apiUrl}/chat/chat_pdf/`, payload, {
+        headers: global_header,
+      });
 
-      setIsLoading(false);
-
-      // handleLoadResponse(response.data.response);
+      // Extract the bot's response and update messages
+      const botMessage = { text: response.data.data.content, sender: "bot" };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
-      if (error.response.data.response === 403) {
-        toast.error("مشکلی در ارسال پیش آمده است، لطفا مجدد تلاش نمایید.");
+      // Handle different error scenarios
+      const errorMessage = error.response?.data?.content || error.message;
 
-        setIsLoading(false);
+      if (error.response?.status === 403) {
+        toast.error("مشکلی در ارسال پیش آمده است، لطفا مجدد تلاش نمایید.");
+      } else {
+        toast.error(`خطا: ${errorMessage}`);
       }
+    } finally {
+      // Ensure the loading state is reset regardless of success or failure
+      setIsLoading(false);
     }
   };
 

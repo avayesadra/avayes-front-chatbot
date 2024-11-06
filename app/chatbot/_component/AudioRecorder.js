@@ -43,7 +43,7 @@ const AudioRecorder = ({ setInputMessage }) => {
     const formData = new FormData();
     formData.append("audio", audioFile);
 
-    const promise = axios.post(`${apiUrl}/speech_to_text/`, formData, {
+    const promise = axios.post(`${apiUrl}/chat/speech_to_text/`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -55,15 +55,20 @@ const AudioRecorder = ({ setInputMessage }) => {
         pending: "در حال پردازش صدا...",
         success: {
           render({ data }) {
-            setInputMessage(data.data.transcription_text);
+            setInputMessage(data.data.data.text);
 
             return "متن با موفقیت دریافت شد";
           },
         },
         error: {
           render({ data }) {
-            console.error("Error uploading file:", data);
-            return "خطا در تبدیل صوت به متن، مجدد تلاش کنید.";
+            console.log(data);
+            
+            if (data.resposne.data.status === 400) {
+              return data.resposne.data.error.details.audio[0].messages;
+            } else {
+              return "خطا در تبدیل صوت به متن، مجدد تلاش کنید.";
+            }
           },
         },
       },
