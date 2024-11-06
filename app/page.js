@@ -13,6 +13,8 @@ const sampleMessages = [{ text: "چطور می‌تونم کمکتون کنم؟"
 export default function chatBotPage() {
   const [messages, setMessages] = useState(sampleMessages);
   const [isLoading, setIsLoading] = useState(false);
+  const [thread, setThread] = useState(null);
+  const [threadIsLoading, setThreadIsLoading] = useState(false);
 
   const lastMessageRef = useRef(null);
 
@@ -27,13 +29,8 @@ export default function chatBotPage() {
     try {
       // Prepare the request payload
       const payload = {
-        sourceId: "src_De7h6E6Ie4UXNlIKMLKod",
-        messages: [
-          {
-            role: "user",
-            content: inputMessage,
-          },
-        ],
+        thread_id: thread,
+        message: inputMessage,
       };
 
       // Send the POST request
@@ -56,6 +53,37 @@ export default function chatBotPage() {
     } finally {
       // Ensure the loading state is reset regardless of success or failure
       setIsLoading(false);
+    }
+  };
+
+  const handleStartThread = async () => {
+    setThreadIsLoading(true);
+
+    try {
+      // Send the POST request
+      const response = await axios.post(`${apiUrl}/chat/thread/`, {
+        headers: global_header,
+      });
+
+      if (response.data.status === 200) {
+        setThread(response.data.data.thread_id);
+      }
+
+      // // Extract the bot's response and update messages
+      // const botMessage = { text: response.data.data.content, sender: "bot" };
+      // setMessages((prevMessages) => [...prevMessages, botMessage]);
+    } catch (error) {
+      // Handle different error scenarios
+      const errorMessage = error.response?.data?.content || error.message;
+
+      if (error.response?.status === 403) {
+        toast.error("مشکلی در ارسال پیش آمده است، لطفا مجدد تلاش نمایید.");
+      } else {
+        toast.error(`خطا: ${errorMessage}`);
+      }
+    } finally {
+      // Ensure the loading state is reset regardless of success or failure
+      setThreadIsLoading(false);
     }
   };
 
@@ -100,7 +128,11 @@ export default function chatBotPage() {
     <div className="container mx-auto">
       <div
         className="flex flex-col h-screen bg-gray-100 mt-2 mb-5 rounded-lg mx-auto"
-        style={{ height: "70vh", width: "95%" }}
+        style={{
+          height: "70vh",
+          width: "95%",
+          backgroundColor: "rgb(193 205 170 / 30%)",
+        }}
       >
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((message, index) => (
@@ -114,7 +146,7 @@ export default function chatBotPage() {
               <div
                 className={`max-w-xs md:max-w-md rounded-lg p-3 ${
                   message.sender === "user"
-                    ? "bg-blue-500 text-white"
+                    ? "bg-green-700 text-white"
                     : "bg-white text-gray-800"
                 }`}
                 style={{ textAlign: "justify" }}
@@ -131,7 +163,27 @@ export default function chatBotPage() {
           )}
         </div>
 
-        <ChatInput onSendMessage={handleSendMessage} loading={isLoading} />
+        {thread ? (
+          <ChatInput onSendMessage={handleSendMessage} loading={isLoading} />
+        ) : (
+          <div className="flex p-4 justify-center">
+            <button
+              onClick={handleStartThread}
+              className="flex items-center justify-center bg-green-900 text-white rounded-full px-4 py-2 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+              disabled={threadIsLoading}
+              style={{
+                height: "48px",
+                width: "116px",
+              }}
+            >
+              {!threadIsLoading ? (
+                "شروع مکالمه"
+              ) : (
+                <div className="w-4 h-4 border-2 border-solid rounded-full border-gray-100 border-t-gray-400 spin"></div>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

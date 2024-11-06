@@ -43,7 +43,7 @@ export default function ChatInput({ onSendMessage, loading }) {
   // }, [inputMessage]);
 
   return (
-    <div className="border-t border-gray-200" style={{ background: "#f3f4f6" }}>
+    <div className="border-t border-gray-200" style={{ background: "rgb(193 205 170 / 30%)" }}>
       <div className="flex items-center flex-row justify-center my-2 gap-4">
         <AudioRecorder setInputMessage={setInputMessage} />
       </div>
@@ -63,7 +63,7 @@ export default function ChatInput({ onSendMessage, loading }) {
 
         <button
           onClick={handleSendMessage}
-          className="flex items-center justify-center w-20 bg-green-700 text-white mr-2 rounded-full px-4 py-2 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="flex items-center justify-center w-20 bg-green-900 text-white mr-2 rounded-full px-4 py-2 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
           disabled={loading}
         >
           {!loading ? (

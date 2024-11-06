@@ -17,19 +17,19 @@ const FooterComponent = () => {
             height: "55px",
           }}
         >
-          <div className="hidden lg:flex lg:flex-1 justify-end">
-            موسسه اطلاع رسانی و تبلیغاتی آوای صدرا
+          <div className="flex flex-1 justify-center">
+            فرماندهی انتظامی جمهوری اسلامی ایران
           </div>
 
-          <div className="flex lg:flex-1 justify-center footer__logo mx-auto">
+          {/* <div className="flex lg:flex-1 justify-center footer__logo mx-auto">
             <Link href={"/"}>
               <Image src={avayeSadraLogo} height={70} alt="آوای صدرا رسانه" />
             </Link>
-          </div>
+          </div> */}
 
-          <div className="hidden lg:flex lg:flex-1 justify-start">
+          {/* <div className="hidden lg:flex lg:flex-1 justify-start">
             بزرگترین رسانه تبلیغات محیطی کشور
-          </div>
+          </div> */}
         </nav>
       </div>
     </footer>

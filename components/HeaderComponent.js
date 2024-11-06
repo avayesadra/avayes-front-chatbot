@@ -73,19 +73,26 @@ const HeaderComponent = () => {
       </div> */}
 
       <div
-        className="container mx-auto basis-10/12"
+        className="container mx-auto basis-11/12"
         style={{
           background: "#a9a6a6",
           borderRadius: "0 0 100px 100px",
         }}
       >
         <nav className="mx-auto flex w-full items-center justify-between px-3">
-          <div className="hidden lg:flex lg:flex-1 lg:justify-start px-2">
-            <Image src={AvayeSadraLogo} width={60} alt="جهاد دانشگاهی" />
+          <div className="flex flex-1 justify-start lg:px-2">
+            <Image
+              src={
+                "https://upload.wikimedia.org/wikipedia/commons/3/3f/NAJA.svg"
+              }
+              width={60}
+              height={60}
+              alt="فراجا"
+            />
           </div>
 
           <div
-            className="lg:flex lg:flex-1 flex-col items-center justify-center p-5 mx-auto"
+            className="flex flex-1 flex-col items-center justify-center lg:p-5 mx-auto"
             style={{
               background: "#9b9797",
               borderRadius: "0 0 100px 100px",
@@ -94,9 +101,9 @@ const HeaderComponent = () => {
           >
             {pathname === "/" ? (
               <>
-                <h5 className="text-sm">موسسه اطلاع رسانی و تبلیغاتی</h5>
+                <h5 className="text-sm">منابع انسانی فراجا</h5>
 
-                <h3 className="text-2xl font-bold mt-3">آوای صدرا رسانه</h3>
+                <h3 className="text-2xl font-bold mt-3">آوای امید</h3>
               </>
             ) : (
               <Link href={"/"}>
@@ -112,7 +119,7 @@ const HeaderComponent = () => {
             )}
           </div>
 
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end px-2">
+          <div className="flex flex-1 justify-end lg:px-2">
             <Image src={leadersImage} width={100} alt="جهاد دانشگاهی" />
           </div>
         </nav>

@@ -62,8 +62,6 @@ const AudioRecorder = ({ setInputMessage }) => {
         },
         error: {
           render({ data }) {
-            console.log(data);
-            
             if (data.resposne.data.status === 400) {
               return data.resposne.data.error.details.audio[0].messages;
             } else {
@@ -96,7 +94,7 @@ const AudioRecorder = ({ setInputMessage }) => {
         className={`py-2 px-4 rounded-full shadow-lg transition-colors duration-200 flex items-center ${
           isRecording
             ? "bg-red-500 hover:bg-red-600 text-white"
-            : "bg-blue-500 hover:bg-blue-600 text-white"
+            : "bg-green-700 hover:bg-green-800 text-white"
         }`}
       >
         <svg
